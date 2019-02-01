@@ -1,14 +1,17 @@
-package com.example.android.roomwithmoreentitiesapp;
+package com.example.android.roomwithmoreentitiesapp.database;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+
+import com.example.android.roomwithmoreentitiesapp.model.Iphone;
 
 import java.util.List;
 
 public class IphoneRepository extends BaseRepository<Iphone> {
 
     private IphoneDao iphoneDao;
-    private List<Iphone> iphones;
+    private LiveData<List<Iphone>> iphones;
 
     public IphoneRepository(Application application) {
         super(application);
@@ -17,26 +20,26 @@ public class IphoneRepository extends BaseRepository<Iphone> {
     }
 
     @Override
-    void insert(Iphone object) {
+    public void insert(Iphone object) {
         new InsertAsyncTask(iphoneDao).execute(object);
     }
 
     @Override
-    void update(Iphone object) {
+    public void update(Iphone object) {
         new UpdateAsyncTask(iphoneDao).execute(object);
     }
 
     @Override
-    void delete(Iphone object) {
+    public void delete(Iphone object) {
         new DeleteAsyncTask(iphoneDao).execute(object);
     }
 
     @Override
-    void deleteAllObjects() {
+    public void deleteAllObjects() {
         new DeleteAllAsyncTask(iphoneDao).execute();
     }
 
-    List<Iphone> getAllIphones(){
+    public LiveData<List<Iphone>> getAllIphones(){
         return iphones;
     }
 

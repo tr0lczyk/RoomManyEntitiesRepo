@@ -1,14 +1,17 @@
-package com.example.android.roomwithmoreentitiesapp;
+package com.example.android.roomwithmoreentitiesapp.database;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+
+import com.example.android.roomwithmoreentitiesapp.model.Google;
 
 import java.util.List;
 
 public class GoogleRepository extends BaseRepository<Google> {
 
     private GoogleDao googleDao;
-    private List<Google> googles;
+    private LiveData<List<Google>> googles;
 
     public GoogleRepository(Application application) {
         super(application);
@@ -17,26 +20,26 @@ public class GoogleRepository extends BaseRepository<Google> {
     }
 
     @Override
-    void insert(Google object) {
+    public void insert(Google object) {
         new InsertAsyncTask(googleDao).execute(object);
     }
 
     @Override
-    void update(Google object) {
+    public void update(Google object) {
         new UpdateAsyncTask(googleDao).execute(object);
     }
 
     @Override
-    void delete(Google object) {
+    public void delete(Google object) {
         new DeleteAsyncTask(googleDao).execute(object);
     }
 
     @Override
-    void deleteAllObjects() {
+    public void deleteAllObjects() {
         new DeleteAllAsyncTask(googleDao).execute();
     }
 
-    List<Google> getAllGoogles(){
+    public LiveData<List<Google>> getAllGoogles(){
         return googles;
     }
 

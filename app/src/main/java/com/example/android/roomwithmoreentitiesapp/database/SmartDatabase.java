@@ -1,4 +1,4 @@
-package com.example.android.roomwithmoreentitiesapp;
+package com.example.android.roomwithmoreentitiesapp.database;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
@@ -6,9 +6,11 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 
-@Database(entities = {Google.class,Iphone.class},version = 1,exportSchema = false)
+import com.example.android.roomwithmoreentitiesapp.model.Google;
+import com.example.android.roomwithmoreentitiesapp.model.Iphone;
+
+@Database(entities = {Google.class, Iphone.class},version = 1,exportSchema = false)
 abstract class SmartDatabase extends RoomDatabase {
 
     private static SmartDatabase instance;
